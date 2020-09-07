@@ -4,6 +4,10 @@ var ParseServer = require("parse-server").ParseServer;
 var ParseDashboard = require('parse-dashboard');
 var app = express();
 
+var port = process.env.SERVER_PORT || 5000;
+var httpServer = require('http').createServer(app);
+var routes = require('./backend-routes/landmark');
+var options = {allowInsecureHTTP: false};
 
 var api = new ParseServer({
   databaseURI: process.env.DB_URI,
@@ -15,9 +19,6 @@ var api = new ParseServer({
     classNames: ["Landmarks"]
   }
 });
-
-var options = {allowInsecureHTTP: false};
-
 var dashboard = new ParseDashboard({
   apps: [
     {
@@ -34,12 +35,8 @@ var dashboard = new ParseDashboard({
 
 app.use('/dashboard', dashboard);
 app.use('/parse', api);
-
-var routes = require('./backend-routes/landmark');
 app.use('/landmark', routes);
 
-var port = process.env.SERVER_PORT || 5000;
-var httpServer = require('http').createServer(app);
 httpServer.listen(port, function() {
   console.log('parse-server-example running on port ' + port + '.');
 });

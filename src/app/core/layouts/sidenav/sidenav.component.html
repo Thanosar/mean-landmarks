@@ -1,0 +1,14 @@
+<div id="sidebar" [class.open]="opened" [ngClass]="side">
+  <div class="backdrop" (click)="close()"></div>
+  <div class="wrapper" [ngStyle]="{'width': width}">
+    <div class="header d-flex justify-content-between">
+      <ng-content select="[header]"></ng-content>
+      <button *ngIf="hasClose" type="button" class="close ml-auto p-0" aria-label="Close" (click)="close()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="content">
+      <ng-content select="[content]"></ng-content>
+    </div>
+  </div>
+</div>

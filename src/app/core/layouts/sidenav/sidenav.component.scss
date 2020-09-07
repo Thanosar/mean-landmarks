@@ -1,0 +1,89 @@
+
+#sidebar {
+    position: fixed;
+    visibility: hidden;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    min-height: 100vh;
+    z-index: 10002;
+    transition: all .4s;
+
+    &.right, &.left {
+    }
+
+    &.right{
+        right: -100%;
+        .content{
+            right: 0;
+        }
+        .backdrop {
+            right: 0;
+            background-image: linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,1));
+        }
+    }
+    &.left{
+        left: -100%;
+        .content{
+            left: 0;
+        }
+        .backdrop {
+            left: 0;
+            background-image: linear-gradient(to left, rgba(0,0,0,0), rgba(0,0,0,1));
+        }
+    }
+    &.open{
+        visibility: visible;
+        &.right{
+            right: 0;
+            .content{
+                right: 0;
+            }
+        }
+        &.left{
+            left: 0;
+            .content{
+                left: 0;
+            }
+        }
+        .backdrop {
+            opacity: 0.5;
+            visibility: visible;
+        }
+    }
+
+    .backdrop {
+        width: 200%;
+        min-height: 100%;
+        opacity: 0.0;
+        visibility: hidden;
+        position: absolute;
+        transition: all .6s;
+    }
+
+    .wrapper {
+        position: absolute;
+      background-color: #252a2c;
+
+        padding: 15px;
+        top: 0;
+        bottom: 0;
+        .header {
+            button{
+                border: none;
+                background-color: transparent;
+                cursor: pointer;
+            }
+            i{
+                font-size: 1.3rem;
+                color: white;
+            }
+        }
+
+        .content {
+            height: 100%;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+    }
+}

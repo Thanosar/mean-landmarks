@@ -1,0 +1,47 @@
+<nav class="navbar sticky-top navbar-expand-lg navbar-light p-0" style="background: #061840!important;">
+  <div class="flex-grow-1 position-relative text-center align-middle py-1">
+    <button (click)="toggleMenu()"
+            class="side-menu-toggler d-lg-none d-block position-absolute"
+            type="button"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon">
+
+      </span>
+    </button>
+    <a class="navbar-brand text-white" [routerLink]="['']">Dubai</a>
+  </div>
+
+  <div class="d-none d-lg-block w-100 align-middle">
+    <div class="collapse navbar-collapse show">
+      <ul class="menu-items navbar-nav ml-auto mt-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<app-sidenav [opened]="showMenu"
+             (sidebarClose)="toggleMenu(false)"
+             width="60%"
+             [hasClose]="true"
+             class="d-block d-lg-none">
+  <ng-container header>
+    <a class="navbar-brand text-white" [routerLink]="['']">Dubai</a>
+  </ng-container>
+  <ng-container content>
+    <ul class="sidenav menu-items navbar-nav ml-auto mt-2 mt-lg-0 text-left px-2 pt-2">
+      <li class="nav-item ">
+        <a class="nav-link" href="#">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+      </li>
+    </ul>
+  </ng-container>
+</app-sidenav>

@@ -1,0 +1,26 @@
+<app-header></app-header>
+
+<div class="main-container vertical-center">
+
+
+  <div class="card mb-5" *ngFor="let landmark of landmarks">
+    <div class="row no-gutters">
+      <div class="col-auto">
+        <img src="//placehold.it/200" class="img-fluid" alt="">
+      </div>
+      <div class="col text-center">
+        <div class="card-block px-2">
+          <h4 class="card-title">{{landmark.title}}</h4>
+          <p class="card-text">{{landmark.short_info}}</p>
+
+        </div>
+      </div>
+    </div>
+    <div class="card-footer w-100 text-muted">
+     Log in as admin to upload photo
+    </div>
+  </div>
+
+</div>
+
+<app-footer></app-footer>

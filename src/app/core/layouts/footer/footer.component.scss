@@ -1,0 +1,51 @@
+
+#footer {
+    color: #fff!important;
+    ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+
+        ul {
+            li {
+                margin: 5px 0;
+
+                a, span {
+                    i {
+                        margin-right: 5px;
+                    }
+
+                    font-size: 0.9rem;
+                }
+				a {
+					&:hover {
+						text-decoration: underline!important;
+					}
+				}
+            }
+        }
+    }
+    .social-icon {
+        margin-right: 1.5rem;
+        display: inline-block;
+        i {
+            font-size: 1.1rem;
+        }
+    }
+    .main-footer {
+        background-color: #061840;;
+    }
+    p {
+        font-size: 0.7rem;
+    }
+
+    @media screen and (max-width: 767px) {
+        text-align: center;
+    }
+    @media screen and (max-width: 450px) {
+        padding: 0;
+    }
+
+
+}
+
