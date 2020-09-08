@@ -1,0 +1,41 @@
+@import "../../../assets/style/variables";
+
+.home-button {
+  background: $orange!important;
+  color: white;
+}
+
+
+.img-fluid {
+  width: 250px;
+  height: 250px;
+}
+
+
+@media screen and (max-width: 1100px) {
+  .img-fluid {
+    width: 323px;
+  }
+}
+
+.custom-modal {
+  width: 900px;
+}
+.modal {
+  padding: 0 !important; // override inline padding-right added from js
+}
+.modal .modal-dialog {
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  margin: 0;
+}
+.modal .modal-content {
+  height: 100%;
+  border: 0;
+  border-radius: 0;
+}
+.modal .modal-body {
+  overflow-y: auto;
+}
+

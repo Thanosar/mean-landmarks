@@ -7,6 +7,7 @@ var app = express();
 var port = process.env.SERVER_PORT || 5000;
 var httpServer = require('http').createServer(app);
 var routes = require('./routes/landmark');
+var authRoutes = require('./routes/auth');
 var options = {allowInsecureHTTP: false};
 
 var api = new ParseServer({
@@ -36,6 +37,7 @@ var dashboard = new ParseDashboard({
 app.use('/dashboard', dashboard);
 app.use('/parse', api);
 app.use('/landmark', routes);
+app.use('/auth', authRoutes);
 
 httpServer.listen(port, function() {
   console.log('parse-server-example running on port ' + port + '.');

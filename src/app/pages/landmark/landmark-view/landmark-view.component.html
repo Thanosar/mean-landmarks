@@ -1,28 +1,47 @@
-
 <app-loader [loading]="loading"></app-loader>
-
-
-<div class="container-fluid">
+<ng-container *ngIf="landMark">
+  <div class="container-fluid">
     <div class="row">
-        <div class="col">
-            <div class="container">
-                <div>
-                    <img src="https://www.telegraph.co.uk/content/dam/Travel/2019/September/dubai-(getty).jpg" alt="" style="height: 500px;
-                        width: 100%;     border-bottom-right-radius: 10px;
-                        border-bottom-left-radius: 10px;">
-                    <div class="alert alert-success test">
-                        {{landMark.title}}
-                    </div>
-                </div>
-
-                <div class="mt-5">
-                   <pre> {{landMark|json}}</pre>
-                </div>
-
-
+      <div class="col">
+        <div class="container">
+          <div >
+            <img class="image-header"
+                 [lazyLoad]="headerPhoto"
+                 [defaultImage]="defaultImage" alt="">
+            <div class="landmark-title text-center">
+              {{landMark.title}}
             </div>
+          </div>
         </div>
+      </div>
     </div>
-</div>
+  </div>
 
+  <div class="container-fluid mt-5">
+    <div class="row">
+      <div class="col">
+        <div class="container landmark-view">
+
+          <app-icon-title [icon]="'info-circle'" title="Short info" [text]="landMark.short_info"></app-icon-title>
+          <app-icon-title [icon]="'file'" title="Description" [text]="landMark.description"></app-icon-title>
+
+          <div class="mb-4">
+            <app-icon-title
+              [icon]="'map-marker'"
+              title="Location"
+              [hasMap]="true"
+              [lat]="landMark.location.latitude"
+              [lng]="landMark.location.longitude">
+            </app-icon-title>
+          </div>
+
+          <div class="pb-3 text-center">
+            <button class="btn button-orange" (click)="navigateToUrl(landMark.url)">More info</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
 

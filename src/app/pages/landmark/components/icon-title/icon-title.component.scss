@@ -1,0 +1,38 @@
+.title-portlet {
+  width: 160px;
+  padding: 5px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #fff;
+  background-color: #061840;
+  border-radius: 50px;
+}
+
+.icon-portlet {
+  width: 35px;
+  height: 35px;
+  font-size: 1.3rem;
+  color: #fff;
+  background-color: #f58220;
+  border-radius: 100%;
+  margin-right: 10px;
+}
+
+.map-container {
+  height: 400px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 30px;
+}
+
+.map-frame {
+  border: 2px solid black;
+  height: 100%;
+}
+
+#map {
+  height: 100%;
+}
+

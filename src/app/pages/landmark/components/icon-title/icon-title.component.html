@@ -1,0 +1,22 @@
+<div class="d-flex">
+  <div class="d-inline-block icon-portlet text-center">
+    <i [class]="'fa fa-' + icon"></i>
+  </div>
+  <div class="d-inline-block">
+    <div class="title-portlet text-center mb-3">
+      {{title}}
+    </div>
+  </div>
+</div>
+<p *ngIf="!hasMap">
+ {{text}}
+</p>
+
+
+<ng-container *ngIf="hasMap">
+  <div class="map-container">
+    <div class="map-frame">
+      <div id="map"></div>
+    </div>
+  </div>
+</ng-container>

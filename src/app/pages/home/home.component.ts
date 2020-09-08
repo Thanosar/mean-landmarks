@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, TemplateRef} from '@angular/core';
 import {LandmarkService} from '../../core/services/landmark.service';
 import {IJsonResponse} from '../../core/interfaces/IJsonResponse';
 import { ILandMark } from 'src/app/core/interfaces/ΙLandMark';
@@ -14,6 +14,9 @@ export class HomeComponent implements OnInit {
 
   public landmarks: ILandMark[] = [];
   public loading: boolean = true;
+
+  public selectedPhoto: string = "";
+
 
   constructor(public landMarkService: LandmarkService) {
   }
@@ -31,5 +34,8 @@ export class HomeComponent implements OnInit {
      this.loading = false;
     });
   }
+
+
+
 
 }
