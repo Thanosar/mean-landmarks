@@ -1,4 +1,4 @@
 export interface IJsonResponse {
-  data: any[];
+  data: any;
   success: boolean;
 }

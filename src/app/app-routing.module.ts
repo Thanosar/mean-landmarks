@@ -16,10 +16,10 @@ const routes: Routes = [
             path: '',
             component: HomeComponent
           },
-          // {
-          //   path: 'landmarks',
-            // loadChildren: () => import('./pages/payments/payment.module').then(m => m.PaymentModule)
-          // }
+          {
+            path: 'landmark',
+            loadChildren: () => import('./pages/landmark/landmark.module').then(m => m.LandMarkModule)
+          }
         ]
       },
       /*{

@@ -2,19 +2,21 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {HomeComponent} from './home.component';
 import {HeaderModule} from '../../core/layouts/header/header.module';
-import {FooterComponent} from '../../core/layouts/footer/footer.component';
+import {RouterModule} from '@angular/router';
+import {LoaderModule} from '../../core/layouts/loader/loader.module';
 
 
 
 @NgModule({
   declarations: [
-    HomeComponent,
-    FooterComponent
+    HomeComponent
   ],
   exports: [HomeComponent],
-  imports: [
-    CommonModule,
-    HeaderModule
-  ]
+    imports: [
+        CommonModule,
+        HeaderModule,
+        RouterModule,
+        LoaderModule
+    ]
 })
 export class HomeModule { }

@@ -13,6 +13,7 @@ import { ILandMark } from 'src/app/core/interfaces/ΙLandMark';
 export class HomeComponent implements OnInit {
 
   public landmarks: ILandMark[] = [];
+  public loading: boolean = true;
 
   constructor(public landMarkService: LandmarkService) {
   }
@@ -27,6 +28,7 @@ export class HomeComponent implements OnInit {
        console.log("Error");
      }
      this.landmarks = res.data;
+     this.loading = false;
     });
   }
 

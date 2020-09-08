@@ -1,3 +1,5 @@
+<app-loader [loading]="loading"></app-loader>
+
 <app-header></app-header>
 
 <div class="main-container vertical-center">
@@ -10,17 +12,14 @@
       </div>
       <div class="col text-center">
         <div class="card-block px-2">
-          <h4 class="card-title">{{landmark.title}}</h4>
+          <button class="btn btn-primary m-3 " [routerLink]="['/landmark', landmark.objectId]">{{landmark.title}}</button>
+<!--          <h4 class="card-title" ></h4>-->
           <p class="card-text">{{landmark.short_info}}</p>
 
         </div>
       </div>
     </div>
-    <div class="card-footer w-100 text-muted">
-     Log in as admin to upload photo
-    </div>
+
   </div>
 
 </div>
-
-<app-footer></app-footer>

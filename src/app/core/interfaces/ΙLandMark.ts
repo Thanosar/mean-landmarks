@@ -6,4 +6,5 @@ export interface ILandMark {
   short_info: string;
   url: string;
   order: number;
+  photo: string;
 }

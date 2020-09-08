@@ -18,4 +18,12 @@ export class LandmarkService {
       console.log(e);
     }
   }
+
+  public findById(id: string) {
+    try {
+      return this.httpClient.get(this._url + "/" + id);
+    } catch (e) {
+      console.log(e);
+    }
+  }
 }

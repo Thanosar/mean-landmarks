@@ -7,6 +7,7 @@ import {MainLayoutModule} from './core/layouts/main/main.module';
 import {NavbarModule} from './core/layouts/navbar/navbar.module';
 import {HomeModule} from './pages/home/home.module';
 import {HttpClientModule} from '@angular/common/http';
+import { LoaderModule } from './core/layouts/loader/loader.module';
 
 @NgModule({
   declarations: [

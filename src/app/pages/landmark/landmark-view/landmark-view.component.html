@@ -1,0 +1,28 @@
+
+<app-loader [loading]="loading"></app-loader>
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <div class="container">
+                <div>
+                    <img src="https://www.telegraph.co.uk/content/dam/Travel/2019/September/dubai-(getty).jpg" alt="" style="height: 500px;
+                        width: 100%;     border-bottom-right-radius: 10px;
+                        border-bottom-left-radius: 10px;">
+                    <div class="alert alert-success test">
+                        {{landMark.title}}
+                    </div>
+                </div>
+
+                <div class="mt-5">
+                   <pre> {{landMark|json}}</pre>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
