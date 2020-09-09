@@ -1,4 +1,7 @@
-import {Component, HostListener, OnInit, Renderer2} from '@angular/core';
+import {Component, HostListener, OnInit, Renderer2, TemplateRef} from '@angular/core';
+import {BsModalRef, BsModalService} from 'ngx-bootstrap/modal';
+import {AuthService} from '../../services/auth.service';
+import {IJsonResponse} from '../../interfaces/IJsonResponse';
 
 @Component({
   selector: 'app-navbar',
@@ -9,8 +12,14 @@ export class NavbarComponent implements OnInit {
 
   public showMenu: boolean = false;
   public loggedIn: boolean = false;
+  public modalRef: BsModalRef;
 
-  constructor(public renderer: Renderer2) { }
+  public username: string;
+  public password: string;
+
+  constructor(public renderer: Renderer2,
+              public authService: AuthService,
+              private modalService: BsModalService) { }
 
   ngOnInit(): void {
   }
@@ -38,8 +47,22 @@ export class NavbarComponent implements OnInit {
     }
   }
 
-  Login() {
+  public openLoginModal(template: TemplateRef<any>, sidenav: boolean = false) {
+    if (sidenav) {
+      this.toggleMenu();
+    }
+    this.modalRef = this.modalService.show(template);
+  }
 
+  public async onLogin() {
+    await this.authService.login(this.username, this.password).subscribe((res: IJsonResponse) => {
+      console.log(res);
+      if (!res.success) {
+        console.log()
+      }
+
+      window.localStorage.setItem("token", res.data.sessionToken);
+    });
   }
 
 }

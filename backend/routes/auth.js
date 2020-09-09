@@ -6,60 +6,55 @@ Parse.initialize(process.env.APP_ID, process.env.MASTER_KEY);
 Parse.serverURL = process.env.SERVER_URL;
 
 
-router.post('/login', async(req,res) => {
-  try{
-    res.setHeader('Content-Type', 'application/json');
-    res.setHeader('Access-Control-Allow-Origin', '*');
+router.post('/login', async (req, res) => {
+    try {
 
+        if (!req.body.username || !req.body.password) {
+            return res.json({success: false, message: "Password or Username is missing"});
+        }
 
-    // const user = await Parse.User.logIn("admin", "admin").then((res) => {
-    //   console.log(res);
-    // });
+        const user = await Parse.User.logIn(req.body.username, req.body.password);
 
+        if (user) {
+            res.json({data: user, success: true});
+        }
 
-    var currentUser = Parse.User.current();
-
-
-    console.log(currentUser);
-
-  }catch(err){
-    res.send('Error ' + err)
-  }
+    } catch (err) {
+        res.json({success: false, message: err});
+    }
 });
 
-router.post('/logout', async(req,res) => {
-  try{
-    res.setHeader('Content-Type', 'application/json');
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    var currentUser = Parse.User.current();  // this will now be null
-    console.log(currentUser);
-    // Parse.User.logOut().then(() => {
-    //   var currentUser = Parse.User.current();  // this will now be null
-    //   console.log(currentUser);
-    // });
+router.post('/logout', async (req, res) => {
+    try {
 
-  }catch(err){
-    res.send('Error ' + err)
-  }
+        var currentUser = Parse.User.current();  // this will now be null
+        console.log(currentUser);
+        // Parse.User.logOut().then(() => {
+        //   var currentUser = Parse.User.current();  // this will now be null
+        //   console.log(currentUser);
+        // });
+
+    } catch (err) {
+        res.send('Error ' + err)
+    }
 });
 
-router.post('/signOut', async(req,res) => {
-  try{
-    res.setHeader('Content-Type', 'application/json');
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    var user = new Parse.User();
-    user.set("username", "testUser");
-    user.set("password", "testUser");
-    user.set("email", "email@example.com");
 
-    user.set("phone", "415-392-0202");
-    const createdUser = await user.signUp();
+router.post('/isLoggedIn', async (req, res) => {
+    try {
 
-   console.log(createdUser);
+        const token = req.body.token || null;
+        if (token) {
+            await Parse.User.become(token);
+        }
 
-  }catch(err){
-    res.send('Error ' + err)
-  }
+        var currentUser = await Parse.User.current();  // this will now be null
+
+        res.json(currentUser);
+
+    } catch (err) {
+        res.send('Error ' + err)
+    }
 });
 
 

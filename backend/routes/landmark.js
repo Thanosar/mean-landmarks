@@ -8,8 +8,7 @@ Parse.serverURL = process.env.SERVER_URL;
 
 router.get('/', async(req,res) => {
   try{
-    res.setHeader('Content-Type', 'application/json');
-    res.setHeader('Access-Control-Allow-Origin', '*');
+
     const Landmarks = Parse.Object.extend("Landmarks");
     const query = new Parse.Query(Landmarks);
     query.ascending("order");
@@ -27,12 +26,14 @@ router.get('/', async(req,res) => {
 
 router.get('/:id', async(req,res) => {
   try{
-    res.setHeader('Content-Type', 'application/json');
-    res.setHeader('Access-Control-Allow-Origin', '*');
+
+
     const id = req.params.id;
+
     if (!id) {
       res.send("Id not found");
       return;
+
     }
     const LandMarks = Parse.Object.extend("Landmarks");
     const query = new Parse.Query(LandMarks);

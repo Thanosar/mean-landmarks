@@ -1,5 +1,5 @@
 {
-  "name": "instashop",
+  "name": "dubai",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -23,6 +23,7 @@
     "@angular/platform-browser-dynamic": "~9.0.0-rc.0",
     "@angular/router": "~9.0.0-rc.0",
     "bootstrap": "^4.5.2",
+    "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "font-awesome": "^4.7.0",
@@ -44,6 +45,7 @@
     "@types/jasmine": "~3.4.0",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^12.11.1",
+    "body-parser": "^1.19.0",
     "codelyzer": "^5.1.2",
     "jasmine-core": "~3.5.0",
     "jasmine-spec-reporter": "~4.2.1",

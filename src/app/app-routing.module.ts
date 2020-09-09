@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {MainLayoutComponent} from './core/layouts/main/main.component';
 import {HomeComponent} from './pages/home/home.component';
+import {AuthGuard} from './core/guard/auth.guard';
 
 
 const routes: Routes = [
@@ -18,18 +19,11 @@ const routes: Routes = [
           },
           {
             path: 'landmark',
+            canActivate: [AuthGuard],
             loadChildren: () => import('./pages/landmark/landmark.module').then(m => m.LandMarkModule)
           }
         ]
-      },
-      /*{
-        path: 'auth',
-        component: SimpleLayoutComponent,
-        children: [
-          {path: 'login', component: LoginComponent},
-          {path: 'register', component: RegisterComponent},
-        ]
-      },*/
+      }
     ]
   }
 ];

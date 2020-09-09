@@ -8,7 +8,8 @@ import {NavbarModule} from './core/layouts/navbar/navbar.module';
 import {HomeModule} from './pages/home/home.module';
 import {HttpClientModule} from '@angular/common/http';
 import {ModalModule} from 'ngx-bootstrap/modal';
-import {LAZYLOAD_IMAGE_HOOKS, LazyLoadImageModule, ScrollHooks} from 'ng-lazyload-image';
+import {LazyLoadImageModule,} from 'ng-lazyload-image';
+
 
 @NgModule({
   declarations: [
@@ -24,7 +25,6 @@ import {LAZYLOAD_IMAGE_HOOKS, LazyLoadImageModule, ScrollHooks} from 'ng-lazyloa
     HttpClientModule,
     LazyLoadImageModule
   ],
-  providers: [{ provide: LAZYLOAD_IMAGE_HOOKS, useClass: ScrollHooks }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
