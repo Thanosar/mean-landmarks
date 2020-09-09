@@ -19,7 +19,6 @@ const routes: Routes = [
           },
           {
             path: 'landmark',
-            canActivate: [AuthGuard],
             loadChildren: () => import('./pages/landmark/landmark.module').then(m => m.LandMarkModule)
           }
         ]

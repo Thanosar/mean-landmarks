@@ -21,9 +21,9 @@ export class AuthService {
     }
   }
 
-  public isLoggedIn(token: string) {
+  public isLoggedIn(user: any) {
     try {
-      return this.httpClient.post(this._url + "/isLoggedIn", {token});
+      return this.httpClient.post(this._url + "/isLoggedIn", user);
     } catch (e) {
       console.log(e);
     }

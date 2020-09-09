@@ -58,7 +58,7 @@ export class NavbarComponent implements OnInit {
     await this.authService.login(this.username, this.password).subscribe((res: IJsonResponse) => {
       console.log(res);
       if (!res.success) {
-        console.log()
+        return console.log("Wrong credentials")
       }
 
       window.localStorage.setItem("token", res.data.sessionToken);
