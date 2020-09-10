@@ -4,8 +4,32 @@ const authMiddleware = require('../middlewares/authMiddleware');
 const isAdminMiddleware = require('../middlewares/isAdminMiddleware');
 var Parse = require('parse/node');
 
+const multer = require('multer');
+const sharp = require('sharp');
+
 Parse.initialize(process.env.APP_ID, process.env.MASTER_KEY);
 Parse.serverURL = process.env.SERVER_URL;
+
+
+const storage = multer.memoryStorage();
+
+
+const fileFilter = (req, file, cb) => {
+    if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
+        cb(null, true);
+    } else {
+        cb(null, false);
+    }
+};
+
+
+const upload = multer({
+    storage: storage,
+    limits: {
+        fileSize: 5000000
+    },
+    fileFilter: fileFilter
+});
 
 
 router.get('/', async (req, res) => {
@@ -88,7 +112,7 @@ router.put('/update/:id', authMiddleware, isAdminMiddleware, async (req, res) =>
 });
 
 
-router.put('/upload/image/:id', authMiddleware, isAdminMiddleware, async (req, res) => {
+router.put('/upload/image/:id', authMiddleware, isAdminMiddleware, upload.single("image"), async (req, res) => {
     try {
         const id = req.params.id;
 
@@ -100,28 +124,20 @@ router.put('/upload/image/:id', authMiddleware, isAdminMiddleware, async (req, r
             return res.status(200).json({success: false, message: `Landmark with id ${id}, not found`});
         }
 
+        const encodedFull = req.file.buffer.toString('base64');
+        const parseImageFull = new Parse.File(req.file.originalname, {base64: encodedFull});
+        await parseImageFull.save();
+
+        const resized = await sharp(req.file.buffer).rotate().resize(250, 250).toBuffer();
+        const encodedThumb = resized.toString('base64');
+
+        const parseImageThumb = new Parse.File('thumbnail_'+req.file.originalname, {base64: encodedThumb});
+        await parseImageThumb.save();
 
 
-        // const allowKeys = ["title", "short_info", "description", "location"];
-        //
-        // Object.keys(req.body || {}).forEach(key => {
-        //     if (!allowKeys.includes(key)) {
-        //         return;
-        //     }
-        //
-        //     if (key === "location") {
-        //         const point = new Parse.GeoPoint({
-        //             latitude: req.body.location.latitude,
-        //             longitude: req.body.location.longitude
-        //         });
-        //         landmark.set("location", point)
-        //     } else {
-        //         landmark.set(key, req.body[key]);
-        //     }
-        // });
-        //
-        // await landmark.save();
-
+        landmark.set('photo', parseImageFull);
+        landmark.set('photo_thumb', parseImageThumb);
+        await landmark.save();
         return res.status(200).json({success: true, message: `Updated successfully`});
 
     } catch (err) {
@@ -129,5 +145,10 @@ router.put('/upload/image/:id', authMiddleware, isAdminMiddleware, async (req, r
     }
 });
 
+router.use((err, req, res, next) => {
+    if (err.code === 'LIMIT_FILE_SIZE') {
+        return res.status(200).send({ success: false, message: 'The system should not allow photos larger than 5MB to be uploaded'});
+    }
+});
 
 module.exports = router;

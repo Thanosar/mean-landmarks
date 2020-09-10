@@ -36,9 +36,9 @@ export class LandmarkService {
     }
   }
 
-  public uploadImage(id: string, image: string) {
+  public uploadImage(id: string, file: any) {
     try {
-      return this.httpClient.put(this._url + "/upload/image/" + id, {image});
+      return this.httpClient.put(this._url + "/upload/image/" + id, file);
     } catch (e) {
       console.log(e);
     }

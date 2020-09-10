@@ -91,7 +91,6 @@ export class LandmarkEditComponent implements OnInit {
   public onSelect(event) {
     this.sizeWarning = false;
     this.sizeText = "";
-    console.log(event);
 
     if (event.rejectedFiles.length > 0) {
       event.rejectedFiles.forEach(file => {
@@ -109,16 +108,19 @@ export class LandmarkEditComponent implements OnInit {
   }
 
   public onRemove(event) {
-    console.log(event);
     this.files.splice(this.files.indexOf(event), 1);
   }
 
   public async onUploadImage() {
-    console.log(this.files);
-    const image = this.files[0].name;
-    await this.landMarkService.uploadImage(this.landmarkId, image).subscribe((res: IJsonResponse) => {
-      console.log(res);
-    })
+    const formData = new FormData();
+    formData.append('image', this.files[0]);
+    await this.landMarkService.uploadImage(this.landmarkId, formData).subscribe((res: IJsonResponse) => {
+      if (!res.success) {
+        this.toastr.error(res.message);
+        return;
+      }
+      this.toastr.success(res.message);
+    }, (err) => this.toastr.error(err.message || "Error"))
   }
 
 }

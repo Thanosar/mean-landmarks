@@ -62,7 +62,7 @@
             <app-icon-title [icon]="'upload'" title="Upload image" [hasText]="false"></app-icon-title>
             <div class="mb-4 d-flex justify-content-center">
 
-              <ngx-dropzone (change)="onSelect($event)" [multiple]="false" [maxFileSize]="5000000 ">
+              <ngx-dropzone (change)="onSelect($event)" [multiple]="false" >
                 <ngx-dropzone-label>Drag and drop the file</ngx-dropzone-label>
                 <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
                   <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
