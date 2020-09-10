@@ -1,4 +1,4 @@
 export const environment = {
     production: true,
-    serverUrl: 'https://api-dubai.thanosar.gr/landmark'
+    serverUrl: 'https://api-dubai.thanosar.gr/'
 };
