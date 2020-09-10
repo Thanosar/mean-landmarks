@@ -7,7 +7,7 @@
     <div class="col">
       <div class="container main-container">
         <span *ngIf="landmarks.length; else noData">
-          <div class="card mb-5" *ngFor="let landmark of landmarks">
+          <div class="card mb-5 bshadow" *ngFor="let landmark of landmarks">
             <div class="row no-gutters">
               <div class="col-auto"
                    (click)="lgModal.show(); selectedPhoto = (landmark.photo && landmark.photo.url ? landmark.photo.url : '')">
