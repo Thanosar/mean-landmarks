@@ -22,8 +22,11 @@
                <li class="nav-item">
                  <a class="nav-link" [routerLink]="['']">Home</a>
                </li>
-               <li class="nav-item">
+               <li class="nav-item" *ngIf="!authService.user">
                  <a class="nav-link" (click)="openLoginModal(loginModal)">Login</a>
+               </li>
+               <li class="nav-item" *ngIf="authService.user">
+                 <a class="nav-link" (click)="onLogout()">Logout, {{authService.user.username}}</a>
                </li>
              </ul>
            </div>
@@ -69,14 +72,35 @@
                <div class="col">
                    <div class="container">
                        <div class="form-group">
-                           <label for="exampleInputEmail1">Username</label>
+                            <div class="d-flex">
+                              <div class="d-inline-block">
+                                <label for="exampleInputEmail1">Username</label>
+                              </div>
+                              <div class="d-inline-block ml-2 text-danger">
+                                *
+                              </div>
+                            </div>
                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" [(ngModel)]="username">
                        </div>
                        <div class="form-group">
-                           <label for="exampleInputPassword1">Password</label>
+                         <div class="d-flex">
+                           <div class="d-inline-block">
+                             <label for="exampleInputPassword1">Password</label>
+                           </div>
+                           <div class="d-inline-block ml-2 text-danger">
+                             *
+                           </div>
+                         </div>
                            <input type="password" class="form-control" id="exampleInputPassword1" [(ngModel)]="password">
                        </div>
-
+                       <div class="text-right">
+                         <small >
+                           (*) required field
+                         </small>
+                       </div>
+                     <div class="alert alert-danger" role="alert" *ngIf="loginError">
+                       {{loginError}}
+                     </div>
                        <div class="text-center">
                            <button class="btn btn-primary" [disabled]="!username || !password" (click)="onLogin()">Login</button>
                        </div>

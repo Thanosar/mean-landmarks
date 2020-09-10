@@ -5,6 +5,8 @@ import {NgModule} from '@angular/core';
 import {LoaderModule} from '../../core/layouts/loader/loader.module';
 import {IconTitleComponent} from './components/icon-title/icon-title.component';
 import {LazyLoadImageModule} from 'ng-lazyload-image';
+import { LandmarkEditComponent } from './landmark-edit/landmark-edit.component';
+import {ReactiveFormsModule} from '@angular/forms';
 
 
 @NgModule({
@@ -13,10 +15,12 @@ import {LazyLoadImageModule} from 'ng-lazyload-image';
     CommonModule,
     LoaderModule,
     LazyLoadImageModule,
+    ReactiveFormsModule,
   ],
   exports: [LandmarkViewComponent],
   declarations: [LandmarkViewComponent,
-    IconTitleComponent
+    IconTitleComponent,
+    LandmarkEditComponent
   ]
 })
 export class LandMarkModule {

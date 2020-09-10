@@ -1,9 +1,8 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {LandmarkService} from '../../../core/services/landmark.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {IJsonResponse} from '../../../core/interfaces/IJsonResponse';
 import {ILandMark} from '../../../core/interfaces/ΙLandMark';
-import * as L from 'leaflet';
 
 @Component({
   selector: 'app-landmark-view',
@@ -12,13 +11,14 @@ import * as L from 'leaflet';
 })
 export class LandmarkViewComponent implements OnInit {
 
+
+
   public headerPhoto: string = 'https://www.telegraph.co.uk/content/dam/Travel/2019/September/dubai-(getty).jpg';
+  public defaultImage = 'https://www.telegraph.co.uk/content/dam/Travel/2019/September/dubai-(getty).jpg';
+  public image = 'https://images.unsplash.com/photo-1443890923422-7819ed4101c0?fm=jpg';
 
   public landMark: ILandMark;
   public loading: boolean = true;
-
-  defaultImage = 'https://www.telegraph.co.uk/content/dam/Travel/2019/September/dubai-(getty).jpg';
-  image = 'https://images.unsplash.com/photo-1443890923422-7819ed4101c0?fm=jpg';
 
   constructor(public landMarkService: LandmarkService,
               private _route: ActivatedRoute,

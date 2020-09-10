@@ -11,6 +11,8 @@ import {ModalModule} from 'ngx-bootstrap/modal';
 import {LazyLoadImageModule,} from 'ng-lazyload-image';
 import {AuthInterceptor} from './core/interceptors/HttpInterceptor';
 
+import { ToastrModule } from 'ngx-toastr';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -18,6 +20,8 @@ import {AuthInterceptor} from './core/interceptors/HttpInterceptor';
   ],
   imports: [
     ModalModule.forRoot(),
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
     BrowserModule,
     AppRoutingModule,
     MainLayoutModule,

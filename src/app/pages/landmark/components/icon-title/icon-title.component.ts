@@ -14,6 +14,7 @@ export class IconTitleComponent implements OnInit, AfterViewInit {
   @Input() lat: number;
   @Input() lng: string;
   @Input() hasMap: boolean = false;
+  @Input() hasText: boolean = true;
 
   private map;
   private tileUrl: string = 'http://{s}.tile.osm.org/{z}/{x}/{y}.png';
@@ -45,5 +46,6 @@ export class IconTitleComponent implements OnInit, AfterViewInit {
     }
 
   }
+
 
 }

@@ -6,21 +6,34 @@
   <div class="row">
     <div class="col">
       <div class="container main-container">
-        <div class="card mb-5" *ngFor="let landmark of landmarks">
-          <div class="row no-gutters">
-            <div class="col-auto" (click)="lgModal.show(); selectedPhoto = (landmark.photo && landmark.photo.url ? landmark.photo.url : '')">
-              <img [src]="(landmark.photo_thumb && landmark.photo_thumb.url) ? landmark.photo_thumb.url : '//placehold.it/200'"
-                   class="img-fluid" alt="">
-            </div>
-            <div class="col text-center">
-              <div class="card-block px-2">
-                <button class="btn m-3 home-button"
-                        [routerLink]="['/landmark', landmark.objectId]">{{landmark.title}}</button>
-                <p class="card-text">{{landmark.short_info}}</p>
+        <span *ngIf="landmarks.length; else noData">
+          <div class="card mb-5" *ngFor="let landmark of landmarks">
+            <div class="row no-gutters">
+              <div class="col-auto"
+                   (click)="lgModal.show(); selectedPhoto = (landmark.photo && landmark.photo.url ? landmark.photo.url : '')">
+                <img
+                  [src]="(landmark.photo_thumb && landmark.photo_thumb.url) ? landmark.photo_thumb.url : '//placehold.it/200'"
+                  class="img-fluid" alt="">
+              </div>
+              <div class="col text-center">
+                <div class="card-block px-2">
+                  <button class="btn m-3 home-button"
+                          [routerLink]="['/landmark', landmark.objectId]">{{landmark.title}}</button>
+                  <p class="card-text">{{landmark.short_info}}</p>
+
+                  <button class="btn btn-primary" [routerLink]="'/landmark/' + landmark.objectId + '/edit'"
+                          *ngIf="authService.user && authService.user.sessionToken">
+                    <i class="fa fa-edit"></i>
+                    Edit
+                </button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </span>
+        <ng-template #noData>
+          <p>No landmarks found!</p>
+        </ng-template>
       </div>
     </div>
   </div>

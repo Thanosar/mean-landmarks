@@ -7,90 +7,48 @@ Parse.serverURL = process.env.SERVER_URL;
 
 Parse.User.enableUnsafeCurrentUser();
 
-const authMiddleware = async (req, res, next) => {
-    try {
-
-        const sessionToken = req.header("token");
-
-        const session = await new Parse.Query("_Session")
-            .equalTo("sessionToken", sessionToken)
-            .first({useMasterKey: true});
-
-        if (!session) {
-            res.sendStatus(401);
-        } else {
-            next();
-        }
-    } catch (e) {
-        res.json({success: false, message: e});
-    }
-
-};
-
 router.post('/login', async (req, res) => {
     try {
-
         if (!req.body.username || !req.body.password) {
-            return res.json({success: false, message: "Password or Username is missing"});
+            return await res.json({success: false, message: "Password or Username is missing"});
         }
-
-
         const user = await Parse.User.logIn(req.body.username, req.body.password);
 
         if (user) {
-            res.json({data: user, success: true});
+          return res.status(200).json({data: user, success: true});
         }
-
     } catch (err) {
         res.json({success: false, message: err});
     }
 });
 
-router.get('/logout', async (req, res) => {
+router.post('/logout', async (req, res) => {
     try {
+      const sessionToken  = req.body.token;
+      const session = await new Parse.Query("_Session")
+        .equalTo("sessionToken", sessionToken)
+        .first({useMasterKey: true});
 
-        await Parse.User.logOut();
-        var currentUser = Parse.User.current();
-        res.json(currentUser)
-
+      await session.destroy()
 
     } catch (err) {
-        res.send('Error ' + err)
+      return res.status(500).json({success: false, message: err.message });
     }
 });
 
 
-router.post('/isLoggedIn', authMiddleware, async (req, res) => {
+router.post('/isLoggedIn', async (req, res) => {
     try {
 
-        const token = req.body || null;
+      const sessionToken  = req.body.token;
+      const session = await new Parse.Query("_Session")
+        .equalTo("sessionToken", sessionToken)
+        .first({useMasterKey: true});
 
-
-        if (token) {
-            await Parse.User.become(token);
-
-        }
-
-        var currentUser = await Parse.User.current();  // this will now be null
-
-        res.json(currentUser);
+      res.json(session);
 
     } catch (err) {
         res.json({success: false, message: err});
-    }
-});
-
-router.get('/test', async (req, res) => {
-    try {
-
-
-
-        var currentUser = await Parse.User.current();  // this will now be null
-
-        res.json(currentUser);
-
-    } catch (err) {
-        res.send('Error ' + err)
     }
 });
 

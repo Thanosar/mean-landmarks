@@ -2,6 +2,7 @@ import {Component, HostListener, OnInit, Renderer2, TemplateRef} from '@angular/
 import {BsModalRef, BsModalService} from 'ngx-bootstrap/modal';
 import {AuthService} from '../../services/auth.service';
 import {IJsonResponse} from '../../interfaces/IJsonResponse';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-navbar',
@@ -11,7 +12,7 @@ import {IJsonResponse} from '../../interfaces/IJsonResponse';
 export class NavbarComponent implements OnInit {
 
   public showMenu: boolean = false;
-  public loggedIn: boolean = false;
+  public loginError: string;
   public modalRef: BsModalRef;
 
   public username: string;
@@ -19,12 +20,18 @@ export class NavbarComponent implements OnInit {
 
   constructor(public renderer: Renderer2,
               public authService: AuthService,
+              private toastr: ToastrService,
               private modalService: BsModalService) { }
 
   ngOnInit(): void {
   }
 
-  public toggleMenu(state: boolean = null) {
+  private _resetFields(): void {
+    this.username = "";
+    this.password = "";
+  }
+
+  public toggleMenu(state: boolean = null): void {
     if (state !== null) {
       this.showMenu = state;
     } else {
@@ -42,12 +49,11 @@ export class NavbarComponent implements OnInit {
   @HostListener("click", ["$event", "$event.target"])
   public onClick(event: MouseEvent, targetElement: HTMLElement): void {
     if (targetElement.classList.contains("forceShow")) {
-      console.log('e');
       this.toggleMenu();
     }
   }
 
-  public openLoginModal(template: TemplateRef<any>, sidenav: boolean = false) {
+  public openLoginModal(template: TemplateRef<any>, sidenav: boolean = false): void {
     if (sidenav) {
       this.toggleMenu();
     }
@@ -58,11 +64,32 @@ export class NavbarComponent implements OnInit {
     await this.authService.login(this.username, this.password).subscribe((res: IJsonResponse) => {
       console.log(res);
       if (!res.success) {
-        return console.log("Wrong credentials")
+        this.loginError = res.message.message || null;
+        return;
       }
-
+      this._resetFields();
+      this.modalRef.hide();
       window.localStorage.setItem("token", res.data.sessionToken);
+      this.authService.user = res.data;
+      this.toastr.success("Success!", "Login");
     });
+  }
+
+  public onLogout() {
+    this.authService.user = null;
+    window.localStorage.removeItem("token");
+    this.toastr.success("Success", "Logout");
+
+    // const token = window.localStorage.getItem("token");
+    // this.authService.logout(token).subscribe((res: IJsonResponse) => {
+    //   console.log(res);
+    //   if (!res.success) {
+    //     return this.toastr.error("Something has gone wrong", "Logout");
+    //   }
+    //   this.authService.user = null;
+    //   window.localStorage.removeItem("token");
+    //   this.toastr.success("Success", "Logout");
+    // });
   }
 
 }

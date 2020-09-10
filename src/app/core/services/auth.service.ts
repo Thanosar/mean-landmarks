@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import {IUser} from '../interfaces/IUser';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,8 @@ export class AuthService {
   readonly _url: string = 'http://localhost:5000/auth';
 
   public sessionToken: string;
+  public user: IUser;
+
 
   constructor(public httpClient: HttpClient) {
   }
@@ -21,9 +24,18 @@ export class AuthService {
     }
   }
 
-  public isLoggedIn(user: any) {
+
+  public logout(token: string) {
     try {
-      return this.httpClient.post(this._url + "/isLoggedIn", user);
+      return this.httpClient.post(this._url + "/logout", {token});
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  public isLoggedIn(token: string) {
+    try {
+      return this.httpClient.post(this._url + "/isLoggedIn", {token});
     } catch (e) {
       console.log(e);
     }
