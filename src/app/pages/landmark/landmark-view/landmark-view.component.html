@@ -1,5 +1,5 @@
 <app-loader [loading]="loading"></app-loader>
-<ng-container *ngIf="landMark">
+<ng-container *ngIf="landmark; else noLandmark">
   <div class="container-fluid">
     <div class="row">
       <div class="col">
@@ -9,7 +9,7 @@
                  [lazyLoad]="headerPhoto"
                  [defaultImage]="defaultImage" alt="">
             <div class="landmark-title text-center">
-              {{landMark.title}}
+              {{landmark.title}}
             </div>
           </div>
         </div>
@@ -22,21 +22,21 @@
       <div class="col">
         <div class="container landmark-view">
 
-          <app-icon-title [icon]="'info-circle'" title="Short info" [text]="landMark.short_info"></app-icon-title>
-          <app-icon-title [icon]="'file'" title="Description" [text]="landMark.description"></app-icon-title>
+          <app-icon-title [icon]="'info-circle'" title="Short info" [text]="landmark.short_info"></app-icon-title>
+          <app-icon-title [icon]="'file'" title="Description" [text]="landmark.description"></app-icon-title>
 
           <div class="mb-4">
             <app-icon-title
               [icon]="'map-marker'"
               title="Location"
               [hasMap]="true"
-              [lat]="landMark.location.latitude"
-              [lng]="landMark.location.longitude">
+              [lat]="landmark.location.latitude"
+              [lng]="landmark.location.longitude">
             </app-icon-title>
           </div>
 
           <div class="pb-3 text-center">
-            <button class="btn button-orange" (click)="navigateToUrl(landMark.url)">More info</button>
+            <button class="btn button-orange" (click)="navigateToUrl(landmark.url)">More info</button>
           </div>
 
         </div>
@@ -45,3 +45,16 @@
   </div>
 </ng-container>
 
+<ng-template #noLandmark>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col">
+        <div class="container">
+          <div class="alert alert-danger mt-4" role="alert">
+           Landmark not found!
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

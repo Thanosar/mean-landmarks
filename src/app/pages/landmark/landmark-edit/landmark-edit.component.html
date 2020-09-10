@@ -4,11 +4,9 @@
     <div class="row">
       <div class="col">
         <div class="container">
-          <div>
-            <img class="image-header"
-                 [lazyLoad]="headerPhoto"
-                 [defaultImage]="defaultImage" alt="">
-          </div>
+          <img class="image-header"
+               [lazyLoad]="headerPhoto"
+               [defaultImage]="defaultImage" alt="">
         </div>
       </div>
     </div>
@@ -17,61 +15,78 @@
   <div class="container-fluid mt-5">
     <div class="row">
       <div class="col" *ngIf="form">
-        <div class="container landmark-view" [formGroup]="form">
+        <div class="container " [formGroup]="form">
+          <div class="landmark-view">
+            <app-icon-title [icon]="'desktop'" title="Title" [hasText]="false"></app-icon-title>
+            <div class="pb-4 margin-left">
+              <input type="text" class="form-control" formControlName="title">
+            </div>
 
-          <app-icon-title [icon]="'sort'" title="Order" [hasText]="false"></app-icon-title>
-          <div class="pb-4 margin-left">
-            <input type="number" class="form-control" min="1" formControlName="order">
-          </div>
+            <app-icon-title [icon]="'info-circle'" title="Short info" [hasText]="false"></app-icon-title>
+            <div class="pb-4 margin-left">
+              <textarea class="form-control" rows="4" formControlName="short_info"></textarea>
+            </div>
 
-          <app-icon-title [icon]="'desktop'" title="Title" [hasText]="false"></app-icon-title>
-          <div class="pb-4 margin-left">
-            <input type="text" class="form-control" formControlName="title">
-          </div>
+            <app-icon-title [icon]="'file'" title="Description" [hasText]="false"></app-icon-title>
+            <div class="pb-4 margin-left">
+              <textarea class="form-control" rows=13 formControlName="description"></textarea>
+            </div>
 
-          <app-icon-title [icon]="'info-circle'" title="Short info" [hasText]="false"></app-icon-title>
-          <div class="pb-4 margin-left">
-            <textarea class="form-control" rows="4" formControlName="short_info"></textarea>
-          </div>
+            <app-icon-title [icon]="'link'" title="Url" [hasText]="false"></app-icon-title>
+            <div class="pb-4 margin-left">
+              <input type="text" class="form-control" formControlName="url">
+            </div>
 
-          <app-icon-title [icon]="'file'" title="Description" [hasText]="false"></app-icon-title>
-          <div class="pb-4 margin-left">
-            <textarea class="form-control" rows=13 formControlName="description"></textarea>
-          </div>
-
-          <app-icon-title [icon]="'link'" title="Url" [hasText]="false"></app-icon-title>
-          <div class="pb-4 margin-left">
-            <input type="text" class="form-control" formControlName="url">
-          </div>
-
-          <app-icon-title [icon]="'map-marker'" title="Long. & Lat." [hasText]="false"></app-icon-title>
-          <div class="pb-4 margin-left">
-            <div class="d-flex">
-              <div class="d-inline-block mr-3">
-                <input type="number" class="form-control" formControlName="latitude">
+            <app-icon-title [icon]="'map-marker'" title="Long. & Lat." [hasText]="false"></app-icon-title>
+            <div class="pb-4 margin-left">
+              <div class="d-flex">
+                <div class="d-inline-block mr-3">
+                  <input type="number" class="form-control" formControlName="latitude">
+                </div>
+                <div class="d-inline-block">
+                  <input type="number" class="form-control" formControlName="longitude">
+                </div>
               </div>
-              <div class="d-inline-block">
-                <input type="number" class="form-control" formControlName="longitude">
-              </div>
+            </div>
+
+            <div class="mb-4">
+              <app-icon-title
+                      [icon]="'map-marker'"
+                      title="Location"
+                      [hasMap]="true"
+                      [lat]="landMark.location.latitude"
+                      [lng]="landMark.location.longitude">
+              </app-icon-title>
+            </div>
+
+            <div class="mb-4">
+              <ngx-dropzone (change)="onSelect($event)" [multiple]="false">
+                <ngx-dropzone-label>Drag and drop the file</ngx-dropzone-label>
+                <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
+                  <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                </ngx-dropzone-preview>
+              </ngx-dropzone>
+            </div>
+
+
+            <div class="pb-3 ">
+             <div class="d-flex justify-content-center">
+               <div class="d-inline-block mr-3">
+                 <button class="btn btn-success" (click)="onUpdate(form.value)" [disabled]="!form.valid">
+                   <i class="fa fa-edit"></i>
+                   Update
+                 </button>
+               </div>
+               <div class="d-inline-block">
+                 <button class="btn btn-primary" (click)="onUploadImage()" [disabled]="!files.length">
+                   <i class="fa fa-edit"></i>
+                   Upload
+                 </button>
+               </div>
+             </div>
             </div>
           </div>
 
-          <div class="mb-4">
-            <app-icon-title
-              [icon]="'map-marker'"
-              title="Location"
-              [hasMap]="true"
-              [lat]="landMark.location.latitude"
-              [lng]="landMark.location.longitude">
-            </app-icon-title>
-          </div>
-
-          <div class="pb-3 text-center">
-            <button class="btn btn-success" (click)="onUpdate(form.value)" [disabled]="!form.valid">
-              <i class="fa fa-edit"></i>
-              Update
-            </button>
-          </div>
 
         </div>
       </div>

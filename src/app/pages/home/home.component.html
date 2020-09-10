@@ -22,7 +22,7 @@
                   <p class="card-text">{{landmark.short_info}}</p>
 
                   <button class="btn btn-primary" [routerLink]="'/landmark/' + landmark.objectId + '/edit'"
-                          *ngIf="authService.user && authService.user.sessionToken">
+                          *ngIf="authService.user">
                     <i class="fa fa-edit"></i>
                     Edit
                 </button>

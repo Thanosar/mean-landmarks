@@ -17,7 +17,7 @@ export class LandmarkViewComponent implements OnInit {
   public defaultImage = 'https://www.telegraph.co.uk/content/dam/Travel/2019/September/dubai-(getty).jpg';
   public image = 'https://images.unsplash.com/photo-1443890923422-7819ed4101c0?fm=jpg';
 
-  public landMark: ILandMark;
+  public landmark: ILandMark;
   public loading: boolean = true;
 
   constructor(public landMarkService: LandmarkService,
@@ -41,11 +41,11 @@ export class LandmarkViewComponent implements OnInit {
       if (!res.success) {
         return console.log('Landmark not found');
       }
-      this.landMark = res.data;
-      if (this.landMark.photo && this.landMark.photo.url) {
-        this.headerPhoto = this.landMark.photo.url;
+      this.landmark = res.data;
+      if (this.landmark.photo && this.landmark.photo.url) {
+        this.headerPhoto = this.landmark.photo.url;
       }
-    });
+    }, () => this.loading = false);
   }
 
   public navigateToUrl(url: string) {

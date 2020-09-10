@@ -13,6 +13,7 @@ import {ToastrService} from 'ngx-toastr';
 })
 export class LandmarkEditComponent implements OnInit {
 
+  public files: File[] = [];
   public defaultImage = 'https://www.telegraph.co.uk/content/dam/Travel/2019/September/dubai-(getty).jpg';
   public image = 'https://images.unsplash.com/photo-1443890923422-7819ed4101c0?fm=jpg';
   public headerPhoto: string = 'https://www.telegraph.co.uk/content/dam/Travel/2019/September/dubai-(getty).jpg';
@@ -58,7 +59,10 @@ export class LandmarkEditComponent implements OnInit {
       if (this.landMark.photo && this.landMark.photo.url) {
         this.headerPhoto = this.landMark.photo.url;
       }
-    });
+    }, (error => {
+      this.toastr.error(error.message);
+      this.loading = false;
+    }));
   }
 
   public async onUpdate(form: ILandMark & {longitude: number, latitude: number}) {
@@ -72,7 +76,27 @@ export class LandmarkEditComponent implements OnInit {
         return this.toastr.error(res.message || "Update failed");
       }
       this.toastr.success(res.message || "Update successfully");
-    })
+    }, (err) => {
+      this.toastr.error(err.error || "Update request failed");
+    });
+  }
+
+
+
+  public onSelect(event) {
+    if (this.files.length >= 1) {
+      return;
+    }
+    this.files.push(...event.addedFiles);
+  }
+
+  public onRemove(event) {
+    console.log(event);
+    this.files.splice(this.files.indexOf(event), 1);
+  }
+
+  public onUploadImage() {
+
   }
 
 }

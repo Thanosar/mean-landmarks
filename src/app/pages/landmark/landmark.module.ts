@@ -7,6 +7,7 @@ import {IconTitleComponent} from './components/icon-title/icon-title.component';
 import {LazyLoadImageModule} from 'ng-lazyload-image';
 import { LandmarkEditComponent } from './landmark-edit/landmark-edit.component';
 import {ReactiveFormsModule} from '@angular/forms';
+import {NgxDropzoneModule} from 'ngx-dropzone';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import {ReactiveFormsModule} from '@angular/forms';
     LoaderModule,
     LazyLoadImageModule,
     ReactiveFormsModule,
+    NgxDropzoneModule
   ],
   exports: [LandmarkViewComponent],
   declarations: [LandmarkViewComponent,

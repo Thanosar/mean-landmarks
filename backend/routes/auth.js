@@ -43,9 +43,11 @@ router.post('/isLoggedIn', async (req, res) => {
       const sessionToken  = req.body.token;
       const session = await new Parse.Query("_Session")
         .equalTo("sessionToken", sessionToken)
+          .include("user")
         .first({useMasterKey: true});
 
-      res.json(session);
+
+        return res.status(200).json({data: session.get("user"), success: true});
 
     } catch (err) {
         res.json({success: false, message: err});

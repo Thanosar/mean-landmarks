@@ -33,7 +33,7 @@ export class HomeComponent implements OnInit {
         return console.log('Error');
       }
       this.landmarks = res.data;
-    });
+    }, () => this.loading = false);
   }
 
 

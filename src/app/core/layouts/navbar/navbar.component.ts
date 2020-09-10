@@ -71,7 +71,7 @@ export class NavbarComponent implements OnInit {
       this.modalRef.hide();
       window.localStorage.setItem("token", res.data.sessionToken);
       this.authService.user = res.data;
-      this.toastr.success("Success!", "Login");
+      this.toastr.success(`Hello, ${this.authService.user.username || "user"}`, "Login");
     });
   }
 
