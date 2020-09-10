@@ -1,27 +1,25 @@
-# Instashop
+# Dubai's landmarks
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.0-rc.0.
+A MEAN web application that provides information about famous landmarks of Dubai.
 
-## Development server
+## Application
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+A (responsive) blog that displays information about famous landmarks of Dubai. In the home screen displays a list of landmarks with a photo thumbnail, title and some info about the landmark. Only the administrator has the privilege to update the information (title, description, short info, url, location). He can upload a photo too (not larger than 5MB) and the system automatically create a thumbnail for each photo (250px x 250px).
 
-## Code scaffolding
+### Tech stack
+The application is composed of a front-end and a rest api as back-end system using the following technologies:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+* Angular 10
+* Mongo DB
+* Node.js (Express)
+* Parse server (v2.7.4)
+* Parse Dashoard
 
-## Build
+## How to run the application
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+* Clone this repo and install the dependencies by running `npm install`.
+* Start the back-end server by running `npm run server`
+* Start the app (front-end) by running `ng serve`
+* Navigate to `http://localhost:4200/` for the web app enviroment and `http://localhost:5000/dashboard` for the Parse Dashboard
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+[![parse-dashboard.png](https://i.postimg.cc/6qXBMBtd/parse-dashboard.png)](https://postimg.cc/vg0RBF1B)
