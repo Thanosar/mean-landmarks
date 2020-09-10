@@ -1,13 +1,14 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {ILandMark} from '../interfaces/ΙLandMark';
+import {environment} from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LandmarkService {
 
-  readonly _url: string = 'http://localhost:5000/landmark';
+  readonly _url: string = environment.serverUrl + 'landmark';
 
   constructor(public httpClient: HttpClient) {
   }

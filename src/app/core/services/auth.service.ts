@@ -1,13 +1,14 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {IUser} from '../interfaces/IUser';
+import {environment} from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  readonly _url: string = 'http://localhost:5000/auth';
+  readonly _url: string = environment.serverUrl + 'auth';
 
   public sessionToken: string;
   public user: IUser;
