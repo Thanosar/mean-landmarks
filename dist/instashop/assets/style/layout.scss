@@ -11,8 +11,50 @@
   background-color: #ececec;
 }
 
-@media screen and (max-width: 1100px) {
-  .main-container {
 
+.landmark-title {
+  width: 200px;
+  position: absolute;
+  bottom: -20px;
+  left: 830px;
+  padding: 5px;
+  font-weight: 700;
+  font-size: 1.4rem;
+  color: #fff;
+  background-color: #f58220;
+  border-radius: 50px;
+}
+
+.image-header {
+  height: 500px;
+  width: 100%;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  box-shadow: $shadow;
+}
+
+.landmark-view {
+  padding: 10px;
+  background-color: #fdfdfd;
+  border-radius: 10px;
+  box-shadow: $shadow;
+
+  .button-orange {
+    background-color: $orange;
+    color: white;
+  }
+}
+
+
+@media screen and (max-width: 1100px) {
+  .landmark-title {
+    left: 90px;
+    width: 180px;
+    font-size: 1.2rem;
+  }
+}
+@media screen and (max-width: 1100px) {
+  .image-header {
+    height: 300px;
   }
 }
