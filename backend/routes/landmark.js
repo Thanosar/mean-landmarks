@@ -88,4 +88,46 @@ router.put('/update/:id', authMiddleware, isAdminMiddleware, async (req, res) =>
 });
 
 
+router.put('/upload/image/:id', authMiddleware, isAdminMiddleware, async (req, res) => {
+    try {
+        const id = req.params.id;
+
+        const Landmark = Parse.Object.extend("Landmarks");
+        const query = new Parse.Query(Landmark);
+        const landmark = await query.get(id);
+
+        if (!landmark) {
+            return res.status(200).json({success: false, message: `Landmark with id ${id}, not found`});
+        }
+
+
+
+        // const allowKeys = ["title", "short_info", "description", "location"];
+        //
+        // Object.keys(req.body || {}).forEach(key => {
+        //     if (!allowKeys.includes(key)) {
+        //         return;
+        //     }
+        //
+        //     if (key === "location") {
+        //         const point = new Parse.GeoPoint({
+        //             latitude: req.body.location.latitude,
+        //             longitude: req.body.location.longitude
+        //         });
+        //         landmark.set("location", point)
+        //     } else {
+        //         landmark.set(key, req.body[key]);
+        //     }
+        // });
+        //
+        // await landmark.save();
+
+        return res.status(200).json({success: true, message: `Updated successfully`});
+
+    } catch (err) {
+        return res.status(500).json({success: false, message: err.message});
+    }
+});
+
+
 module.exports = router;

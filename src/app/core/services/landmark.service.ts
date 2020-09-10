@@ -29,10 +29,16 @@ export class LandmarkService {
   }
 
   public update(id: string, data: ILandMark) {
-
-    console.log(id);
     try {
       return this.httpClient.put(this._url + "/update/" + id, data);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  public uploadImage(id: string, image: string) {
+    try {
+      return this.httpClient.put(this._url + "/upload/image/" + id, {image});
     } catch (e) {
       console.log(e);
     }

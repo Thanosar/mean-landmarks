@@ -59,15 +59,22 @@
               </app-icon-title>
             </div>
 
-            <div class="mb-4">
-              <ngx-dropzone (change)="onSelect($event)" [multiple]="false">
+            <app-icon-title [icon]="'upload'" title="Upload image" [hasText]="false"></app-icon-title>
+            <div class="mb-4 d-flex justify-content-center">
+
+              <ngx-dropzone (change)="onSelect($event)" [multiple]="false" [maxFileSize]="5000000 ">
                 <ngx-dropzone-label>Drag and drop the file</ngx-dropzone-label>
                 <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
                   <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
                 </ngx-dropzone-preview>
               </ngx-dropzone>
+
             </div>
 
+
+            <div class="alert alert-danger text-center mt-3" *ngIf="sizeWarning">
+              <small>The max limit of the file's size is 5MB (5000000 bytes)</small>
+            </div>
 
             <div class="pb-3 ">
              <div class="d-flex justify-content-center">
@@ -79,7 +86,7 @@
                </div>
                <div class="d-inline-block">
                  <button class="btn btn-primary" (click)="onUploadImage()" [disabled]="!files.length">
-                   <i class="fa fa-edit"></i>
+                   <i class="fa fa-upload"></i>
                    Upload
                  </button>
                </div>

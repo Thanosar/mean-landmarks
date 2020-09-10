@@ -17,8 +17,10 @@
               </div>
               <div class="col text-center">
                 <div class="card-block px-2">
-                  <button class="btn m-3 home-button"
-                          [routerLink]="['/landmark', landmark.objectId]">{{landmark.title}}</button>
+                  <button class="btn m-3 home-button" [routerLink]="['/landmark', landmark.objectId]" title="Click to see more infos">
+                    <i class="fa fa-eye"></i>
+                    {{landmark.title}}
+                  </button>
                   <p class="card-text">{{landmark.short_info}}</p>
 
                   <button class="btn btn-primary" [routerLink]="'/landmark/' + landmark.objectId + '/edit'"

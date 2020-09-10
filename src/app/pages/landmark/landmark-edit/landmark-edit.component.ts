@@ -18,8 +18,12 @@ export class LandmarkEditComponent implements OnInit {
   public image = 'https://images.unsplash.com/photo-1443890923422-7819ed4101c0?fm=jpg';
   public headerPhoto: string = 'https://www.telegraph.co.uk/content/dam/Travel/2019/September/dubai-(getty).jpg';
   public loading: boolean = true;
+  public landmarkId: string = "";
   public landMark: ILandMark;
   public form: FormGroup;
+
+  public sizeWarning: boolean = false;
+  public sizeText: string = "";
 
   constructor(public landMarkService: LandmarkService,
               private _route: ActivatedRoute,
@@ -31,6 +35,7 @@ export class LandmarkEditComponent implements OnInit {
     const routeSnapshot = this._route.snapshot;
     const params = routeSnapshot.params;
     if (params.id) {
+      this.landmarkId = params.id;
       this._getLandMarkById(params.id);
     }
   }
@@ -84,6 +89,19 @@ export class LandmarkEditComponent implements OnInit {
 
 
   public onSelect(event) {
+    this.sizeWarning = false;
+    this.sizeText = "";
+    console.log(event);
+
+    if (event.rejectedFiles.length > 0) {
+      event.rejectedFiles.forEach(file => {
+        if (file.reason === "size") {
+          this.sizeWarning = true;
+          this.sizeText = `The size of the photo is ${file.size} (bytes), but the limit is 5MB`;
+          this.toastr.error("The system should not allow photos larger than 5MB to be uploaded");
+        }
+      })
+    }
     if (this.files.length >= 1) {
       return;
     }
@@ -95,8 +113,12 @@ export class LandmarkEditComponent implements OnInit {
     this.files.splice(this.files.indexOf(event), 1);
   }
 
-  public onUploadImage() {
-
+  public async onUploadImage() {
+    console.log(this.files);
+    const image = this.files[0].name;
+    await this.landMarkService.uploadImage(this.landmarkId, image).subscribe((res: IJsonResponse) => {
+      console.log(res);
+    })
   }
 
 }
