@@ -23,3 +23,7 @@ The application is composed of a front-end and a rest api as back-end system usi
 * Navigate to `http://localhost:4200/` for the web app enviroment and `http://localhost:5000/dashboard` for the Parse Dashboard
 
 [![parse-dashboard.png](https://i.postimg.cc/6qXBMBtd/parse-dashboard.png)](https://postimg.cc/vg0RBF1B)
+
+### Login credentials
+* `admin:admin` (Admin role, rw)
+* `testUser:123456` (Guest, r-)
