@@ -12,7 +12,7 @@ var landmarkRoutes = require('./routes/landmark');
 var authRoutes = require('./routes/auth');
 var options = {allowInsecureHTTP: false};
 
-
+const basicAuth = require('express-basic-auth');
 app.use(cors());
 app.use(bodyParser());
 
@@ -40,7 +40,13 @@ var dashboard = new ParseDashboard({
 
 }, options);
 
-app.use('/dashboard', dashboard);
+app.use('/dashboard', basicAuth({
+  users: {
+    'admin': process.env.DASHBOARD_ADMIN || Math.random(),
+  },
+  challenge: true,
+  realm: 'password protected',
+}), dashboard);
 app.use('/parse', api);
 app.use('/landmark', landmarkRoutes);
 app.use('/auth', authRoutes);
