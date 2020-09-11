@@ -3,6 +3,7 @@ import {BsModalRef, BsModalService} from 'ngx-bootstrap/modal';
 import {AuthService} from '../../services/auth.service';
 import {IJsonResponse} from '../../interfaces/IJsonResponse';
 import {ToastrService} from 'ngx-toastr';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -21,6 +22,7 @@ export class NavbarComponent implements OnInit {
   constructor(public renderer: Renderer2,
               public authService: AuthService,
               private toastr: ToastrService,
+              private router: Router,
               private modalService: BsModalService) { }
 
   ngOnInit(): void {
@@ -60,9 +62,8 @@ export class NavbarComponent implements OnInit {
     this.modalRef = this.modalService.show(template);
   }
 
-  public async onLogin() {
+  public async onLogin(sideNav: boolean = false) {
     await this.authService.login(this.username, this.password).subscribe((res: IJsonResponse) => {
-      console.log(res);
       if (!res.success) {
         this.loginError = res.message.message || null;
         return;
@@ -73,12 +74,20 @@ export class NavbarComponent implements OnInit {
       this.authService.user = res.data;
       this.toastr.success(`Hello, ${this.authService.user.username || "user"}`, "Login");
     });
+
+    if (sideNav) {
+      this.toggleMenu(false);
+    }
   }
 
-  public onLogout() {
+  public onLogout(sideNav: boolean = false) {
     this.authService.user = null;
     window.localStorage.removeItem("token");
     this.toastr.success("Success", "Logout");
+
+    if (sideNav) {
+      this.toggleMenu(false);
+    }
 
     // const token = window.localStorage.getItem("token");
     // this.authService.logout(token).subscribe((res: IJsonResponse) => {
@@ -90,6 +99,12 @@ export class NavbarComponent implements OnInit {
     //   window.localStorage.removeItem("token");
     //   this.toastr.success("Success", "Logout");
     // });
+  }
+
+  public goToHome() {
+    this.toggleMenu(false)
+   this.router.navigate(['/']);
+
   }
 
 }

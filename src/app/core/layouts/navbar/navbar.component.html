@@ -52,11 +52,14 @@
          <ng-container content>
            <ul class="sidenav menu-items navbar-nav ml-auto mt-2 mt-lg-0 text-left px-2 pt-2">
              <li class="nav-item ">
-               <a class="nav-link" [routerLink]="['']">Home</a>
+               <a class="nav-link" (click)="goToHome()">Home</a>
              </li>
-             <li class="nav-item">
-               <a class="nav-link" (click)="openLoginModal(loginModal, true)">Login</a>
-             </li>
+               <li class="nav-item" *ngIf="!authService.user">
+                   <a class="nav-link" (click)="openLoginModal(loginModal, true)">Login</a>
+               </li>
+               <li class="nav-item" *ngIf="authService.user">
+                   <a class="nav-link" (click)="onLogout(true)">Logout, {{authService.user.username}}</a>
+               </li>
            </ul>
          </ng-container>
        </app-sidenav>
