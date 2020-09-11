@@ -1,7 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {HeaderComponent} from './header.component';
-import {SkyconsModule} from 'ngx-skycons';
 
 
 @NgModule({
@@ -10,8 +9,7 @@ import {SkyconsModule} from 'ngx-skycons';
     ],
     exports: [HeaderComponent],
     imports: [
-        CommonModule,
-        SkyconsModule
+        CommonModule
     ]
 })
 export class HeaderModule {

@@ -5,7 +5,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col">
-      <div class="container main-container">
+      <div class="container">
         <span *ngIf="landmarks.length; else noData">
           <div class="card mb-5 bshadow" *ngFor="let landmark of landmarks">
             <div class="row no-gutters">
@@ -15,12 +15,12 @@
                   [src]="(landmark.photo_thumb && landmark.photo_thumb.url) ? landmark.photo_thumb.url : '//placehold.it/250'"
                   class="img-fluid" alt="">
               </div>
-              <div class="col text-center">
+              <div class="col p-4">
                 <div class="card-block px-2">
-                  <button class="btn m-3 home-button" [routerLink]="['/landmark', landmark.objectId]" title="Click to see more infos">
-                    <i class="fa fa-eye"></i>
-                    {{landmark.title}}
-                  </button>
+
+                  <a class="link" [routerLink]="['/landmark', landmark.objectId]">{{landmark.title}}
+                    <i class="fa fa-external-link ml-2" style="font-size: .9rem"></i></a>
+
                   <p class="card-text">{{landmark.short_info}}</p>
 
                   <button class="btn btn-primary" [routerLink]="'/landmark/' + landmark.objectId + '/edit'"

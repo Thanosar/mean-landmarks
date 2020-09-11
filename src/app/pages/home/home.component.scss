@@ -6,6 +6,19 @@
 }
 
 .bshadow {
+  position: relative;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #525361;
+  background-clip: border-box;
+  border: 1px solid rgba(0,0,0,.125);
+  border-radius: 1.25rem;
+  color: white;
+  overflow: hidden;
   box-shadow: $shadow;
 }
 
@@ -42,3 +55,14 @@
   overflow-y: auto;
 }
 
+.link {
+  color: white;
+  font-weight: bold;
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+  display: inline-block;
+}
+
+.card-text {
+  font-size: .9rem;
+}
