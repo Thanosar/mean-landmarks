@@ -25,8 +25,12 @@ The application is composed of a front-end and a rest api as back-end system usi
 
 [![parse-dashboard.png](https://i.postimg.cc/6qXBMBtd/parse-dashboard.png)](https://postimg.cc/vg0RBF1B)
 
+### Production links
+* [Blog](https://dubai.thanosar.gr)
+* [Parse Dashboard](https://api-dubai.thanosar.gr/dashboard)
+
 ### Login credentials
 * `admin:admin` (Admin role, rw)
 * `testUser:123456` (Guest, r-)
-
 * Parse Dashboard `admin:admin`
+* `The credentials are same local and production`
