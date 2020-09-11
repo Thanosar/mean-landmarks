@@ -1,43 +1,50 @@
+@import "../../../../assets/style/variables";
 
-.sidenav.navbar-nav {
-  li {
-    font-size: 1.8rem;
+.bg.nav {
 
-  }
-}
+  background-color: $headerNFooterBg;
 
-.side-menu-toggler {
-  top: 50%;
-  transform: translateY(-50%);
-  right: 0;
-  border: none;
-  border-radius: 4px;
-  font-weight: bold;
-
-
-  &:active {
-    background-color: gray;
-  }
-}
-
-.toggle {
-  font-size: 30px !important;
-}
-
-.sub-menu {
-  ul {
+  .sidenav.navbar-nav {
     li {
-      display: inline-block;
-      margin-right: 15px;
+      font-size: 1.8rem;
+
     }
   }
 
-}
+  .side-menu-toggler {
+    top: 50%;
+    transform: translateY(-50%);
+    right: 0;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
 
-.nav-link {
-  color: #fff !important;
 
-  &:hover {
-    text-decoration: underline !important;
+    &:active {
+      background-color: gray;
+    }
+  }
+
+  .toggle {
+    font-size: 30px !important;
+  }
+
+  .sub-menu {
+    ul {
+      li {
+        display: inline-block;
+        margin-right: 15px;
+      }
+    }
+
+  }
+
+  .nav-link {
+    color: #fff !important;
+
+    &:hover {
+      text-decoration: underline !important;
+    }
   }
 }
+

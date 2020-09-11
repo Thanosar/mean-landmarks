@@ -5,7 +5,7 @@
   color: white;
 }
 
-.bshadow {
+.card-style {
   position: relative;
   display: -ms-flexbox;
   display: flex;
@@ -18,13 +18,18 @@
   border: 1px solid rgba(0,0,0,.125);
   border-radius: 1.25rem;
   color: white;
-  overflow: hidden;
   box-shadow: $shadow;
+}
+
+.edit-button {
+  position: absolute;
+  right: -25px;
 }
 
 .img-fluid {
   width: 250px;
   height: 250px;
+  border-radius: 1.25rem 0 0 1.25rem;
 }
 
 

@@ -1,4 +1,6 @@
 
+@import "../../../../assets/style/variables";
+
 #footer {
     color: #fff!important;
     ul {
@@ -33,7 +35,7 @@
         }
     }
     .main-footer {
-        background-color: #252631;;
+        background-color: $headerNFooterBg;
     }
     p {
         font-size: 0.7rem;

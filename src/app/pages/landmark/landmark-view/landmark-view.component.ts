@@ -26,7 +26,7 @@ export class LandmarkViewComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    window.scrollTo(0, 0);
     const routeSnapshot = this._route.snapshot;
     const params = routeSnapshot.params;
     if (params.id) {

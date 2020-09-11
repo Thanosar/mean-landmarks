@@ -3,63 +3,65 @@
 <app-header></app-header>
 
 <div class="container-fluid">
-  <div class="row">
-    <div class="col">
-      <div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="container">
         <span *ngIf="landmarks.length; else noData">
-          <div class="card mb-5 bshadow" *ngFor="let landmark of landmarks">
+          <div class="card mb-5 card-style" *ngFor="let landmark of landmarks">
             <div class="row no-gutters">
               <div class="col-auto"
                    (click)="lgModal.show(); selectedPhoto = (landmark.photo && landmark.photo.url ? landmark.photo.url : '')">
-                <img
-                  [src]="(landmark.photo_thumb && landmark.photo_thumb.url) ? landmark.photo_thumb.url : '//placehold.it/250'"
-                  class="img-fluid" alt="">
+
+              <img [src]="(landmark.photo_thumb && landmark.photo_thumb.url) ? landmark.photo_thumb.url : '//placehold.it/250'"
+                        class="img-fluid" alt="">
               </div>
               <div class="col p-4">
                 <div class="card-block px-2">
 
                   <a class="link" [routerLink]="['/landmark', landmark.objectId]">{{landmark.title}}
-                    <i class="fa fa-external-link ml-2" style="font-size: .9rem"></i></a>
+                      <i class="fa fa-external-link ml-2" style="font-size: .9rem"></i>
+                  </a>
 
-                  <p class="card-text">{{landmark.short_info}}</p>
-
-                  <button class="btn btn-primary" [routerLink]="'/landmark/' + landmark.objectId + '/edit'"
-                          *ngIf="authService.user">
+                <button class="btn btn-primary edit-button" [routerLink]="'/landmark/' + landmark.objectId + '/edit'"
+                *ngIf="authService.user">
                     <i class="fa fa-edit"></i>
                     Edit
                 </button>
+                  <p class="card-text">{{landmark.short_info}}</p>
+
+
                 </div>
               </div>
             </div>
           </div>
         </span>
-        <ng-template #noData>
-          <p>No landmarks found!</p>
-        </ng-template>
-      </div>
+                <ng-template #noData>
+                    <p>No landmarks found!</p>
+                </ng-template>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
 
 <div bsModal #lgModal="bs-modal" class="modal fade" tabindex="-1"
      role="dialog" aria-labelledby="dialog-sizes-name1">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 id="dialog-sizes-name1" class="modal-title pull-left">Full size photo</h4>
-        <button type="button" class="close pull-right" (click)="lgModal.hide()" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body text-center">
-        <img [src]="selectedPhoto" alt="" *ngIf="selectedPhoto; else noPhoto">
-        <ng-template #noPhoto>
-          <div class="alert alert-danger" role="alert">
-            Full size photo, not found!
-          </div>
-        </ng-template>
-      </div>
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 id="dialog-sizes-name1" class="modal-title pull-left">Full size photo</h4>
+                <button type="button" class="close pull-right" (click)="lgModal.hide()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center">
+                <img [src]="selectedPhoto" alt="" *ngIf="selectedPhoto; else noPhoto">
+                <ng-template #noPhoto>
+                    <div class="alert alert-danger" role="alert">
+                        Full size photo, not found!
+                    </div>
+                </ng-template>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
