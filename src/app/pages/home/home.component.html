@@ -10,6 +10,8 @@
           <div class="card mb-5 card-style" *ngFor="let landmark of landmarks">
             <div class="row no-gutters">
               <div class="col-auto"
+                   style="cursor: pointer"
+                   title="Click for full size image"
                    (click)="lgModal.show(); selectedPhoto = (landmark.photo && landmark.photo.url ? landmark.photo.url : '')">
 
               <img [lazyLoad]="(landmark.photo_thumb && landmark.photo_thumb.url) ? landmark.photo_thumb.url : '//placehold.it/250'"

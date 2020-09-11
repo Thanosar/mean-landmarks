@@ -3,6 +3,7 @@ import {LandmarkService} from '../../../core/services/landmark.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {IJsonResponse} from '../../../core/interfaces/IJsonResponse';
 import {ILandMark} from '../../../core/interfaces/ΙLandMark';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-landmark-view',
@@ -10,8 +11,6 @@ import {ILandMark} from '../../../core/interfaces/ΙLandMark';
   styleUrls: ['./landmark-view.component.scss']
 })
 export class LandmarkViewComponent implements OnInit {
-
-
 
   public headerPhoto: string = 'https://www.telegraph.co.uk/content/dam/Travel/2019/September/dubai-(getty).jpg';
   public defaultImage = 'https://www.telegraph.co.uk/content/dam/Travel/2019/September/dubai-(getty).jpg';
@@ -22,6 +21,7 @@ export class LandmarkViewComponent implements OnInit {
 
   constructor(public landMarkService: LandmarkService,
               private _route: ActivatedRoute,
+              private toastr: ToastrService,
               private _router: Router) {
   }
 
@@ -31,7 +31,6 @@ export class LandmarkViewComponent implements OnInit {
     const params = routeSnapshot.params;
     if (params.id) {
       this._getLandMarkById(params.id);
-
     }
   }
 
@@ -39,7 +38,7 @@ export class LandmarkViewComponent implements OnInit {
     await this.landMarkService.findById(id).subscribe((res: IJsonResponse) => {
       this.loading = false;
       if (!res.success) {
-        return console.log('Landmark not found');
+        return this.toastr.error("Something has gone wrong")
       }
       this.landmark = res.data;
       if (this.landmark.photo && this.landmark.photo.url) {
@@ -50,7 +49,7 @@ export class LandmarkViewComponent implements OnInit {
 
   public navigateToUrl(url: string) {
     if (!url) {
-      return console.log("Sorry, something has gone wrong!");
+      return this.toastr.error("Something has gone wrong")
     }
     this._router.navigate([]).then(() => {
       window.open(url, '_blank');
