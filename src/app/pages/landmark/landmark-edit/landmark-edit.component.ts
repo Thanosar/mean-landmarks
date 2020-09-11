@@ -18,17 +18,18 @@ export class LandmarkEditComponent implements OnInit {
   public image = 'https://images.unsplash.com/photo-1443890923422-7819ed4101c0?fm=jpg';
   public headerPhoto: string = 'https://www.telegraph.co.uk/content/dam/Travel/2019/September/dubai-(getty).jpg';
   public loading: boolean = true;
-  public landmarkId: string = "";
+  public landmarkId: string = '';
   public landMark: ILandMark;
   public form: FormGroup;
 
   public sizeWarning: boolean = false;
-  public sizeText: string = "";
+  public sizeText: string = '';
 
   constructor(public landMarkService: LandmarkService,
               private _route: ActivatedRoute,
               private toastr: ToastrService,
-              private _fb: FormBuilder) { }
+              private _fb: FormBuilder) {
+  }
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
@@ -70,36 +71,38 @@ export class LandmarkEditComponent implements OnInit {
     }));
   }
 
-  public async onUpdate(form: ILandMark & {longitude: number, latitude: number}) {
+  public async onUpdate(form: ILandMark & { longitude: number, latitude: number }) {
+    this.loading = true;
     form.location = {
       longitude: form.longitude,
       latitude: form.latitude
     };
 
     await this.landMarkService.update(form.objectId, form).subscribe((res: IJsonResponse) => {
+      this.loading = false;
       if (!res.success) {
-        return this.toastr.error(res.message || "Update failed");
+        return this.toastr.error(res.message || 'Update failed');
       }
-      this.toastr.success(res.message || "Update successfully");
+      this.toastr.success(res.message || 'Update successfully');
     }, (err) => {
-      this.toastr.error(err.error || "Update request failed");
+      this.loading = false;
+      this.toastr.error(err.error || 'Update request failed');
     });
   }
 
 
-
   public onSelect(event) {
     this.sizeWarning = false;
-    this.sizeText = "";
+    this.sizeText = '';
 
     if (event.rejectedFiles.length > 0) {
       event.rejectedFiles.forEach(file => {
-        if (file.reason === "size") {
+        if (file.reason === 'size') {
           this.sizeWarning = true;
           this.sizeText = `The size of the photo is ${file.size} (bytes), but the limit is 5MB`;
-          this.toastr.error("The system should not allow photos larger than 5MB to be uploaded");
+          this.toastr.error('The system should not allow photos larger than 5MB to be uploaded');
         }
-      })
+      });
     }
     if (this.files.length >= 1) {
       return;
@@ -112,15 +115,20 @@ export class LandmarkEditComponent implements OnInit {
   }
 
   public async onUploadImage() {
+    this.loading = true;
     const formData = new FormData();
     formData.append('image', this.files[0]);
     await this.landMarkService.uploadImage(this.landmarkId, formData).subscribe((res: IJsonResponse) => {
+      this.loading = false;
       if (!res.success) {
         this.toastr.error(res.message);
         return;
       }
       this.toastr.success(res.message);
-    }, (err) => this.toastr.error(err.message || "Error"))
+    }, (err) => {
+      this.loading = false;
+      this.toastr.error(err.message || 'Error');
+    });
   }
 
 }

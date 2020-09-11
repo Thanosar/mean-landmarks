@@ -31,10 +31,10 @@
                  <a class="nav-link" [routerLink]="['']">Home</a>
                </li>
                <li class="nav-item" *ngIf="!authService.user">
-                 <a class="nav-link" (click)="openLoginModal(loginModal)">Login</a>
+                 <a class="nav-link login" (click)="openLoginModal(loginModal)">Login</a>
                </li>
                <li class="nav-item" *ngIf="authService.user">
-                 <a class="nav-link" (click)="onLogout()">Logout, {{authService.user.username}}</a>
+                 <a class="nav-link login" (click)="onLogout()">Logout, {{authService.user.username}}</a>
                </li>
              </ul>
            </div>
@@ -55,10 +55,10 @@
                <a class="nav-link" (click)="goToHome()">Home</a>
              </li>
                <li class="nav-item" *ngIf="!authService.user">
-                   <a class="nav-link" (click)="openLoginModal(loginModal, true)">Login</a>
+                   <a class="nav-link login" (click)="openLoginModal(loginModal, true)">Login</a>
                </li>
                <li class="nav-item" *ngIf="authService.user">
-                   <a class="nav-link" (click)="onLogout(true)">Logout, {{authService.user.username}}</a>
+                   <a class="nav-link login" (click)="onLogout(true)">Logout, {{authService.user.username}}</a>
                </li>
            </ul>
          </ng-container>
