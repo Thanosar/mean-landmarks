@@ -18,7 +18,7 @@ import {ModalModule} from 'ngx-bootstrap/modal';
     HeaderModule,
     RouterModule,
     LoaderModule,
-    ModalModule
+    ModalModule,
   ]
 })
 export class HomeModule { }
