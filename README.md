@@ -19,7 +19,7 @@ The application is composed of a front-end and a rest api as back-end system usi
 
 * Clone this repo and install the dependencies by running `npm install`.
 * Rename the .env.example file to .env and insert valid values
-* Start the back-end server by running `npm run server`
+* Start the back-end server by running `npm run server` (required valid .env)
 * Start the app (front-end) by running `ng serve`
 * Navigate to `http://localhost:4200/` for the web app enviroment and `http://localhost:5000/dashboard` for the Parse Dashboard
 
