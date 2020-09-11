@@ -1,5 +1,9 @@
 import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
 import * as L from 'leaflet';
+// @ts-ignore
+import icon from "leaflet/dist/images/marker-icon.png/";
+// @ts-ignore
+import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 
 @Component({
   selector: 'app-icon-title',
@@ -34,6 +38,12 @@ export class IconTitleComponent implements OnInit, AfterViewInit {
 
 
   private initMap(): void {
+    let DefaultIcon = L.icon({
+      iconUrl: icon,
+      shadowUrl: iconShadow
+    });
+
+    L.Marker.prototype.options.icon = DefaultIcon;
     const container = document.getElementById('map');
     if (container) {
       this.map = L.map('map').setView([this.lng, this.lat], 13);
