@@ -27,3 +27,5 @@ The application is composed of a front-end and a rest api as back-end system usi
 ### Login credentials
 * `admin:admin` (Admin role, rw)
 * `testUser:123456` (Guest, r-)
+
+* Parse Dashboard `admin:admin`
