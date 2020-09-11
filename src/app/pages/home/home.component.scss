@@ -32,13 +32,6 @@
   border-radius: 1.25rem 0 0 1.25rem;
 }
 
-
-@media screen and (max-width: 1100px) {
-  .img-fluid {
-    width: 323px;
-  }
-}
-
 .custom-modal {
   width: 900px;
 }
@@ -70,4 +63,13 @@
 
 .card-text {
   font-size: .9rem;
+}
+
+
+
+@media screen and (max-width: 1100px) {
+  .img-fluid {
+    width: 350px;
+    border-radius: 1.25rem 1.25rem 0 0;
+  }
 }

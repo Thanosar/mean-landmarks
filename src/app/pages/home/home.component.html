@@ -12,7 +12,8 @@
               <div class="col-auto"
                    (click)="lgModal.show(); selectedPhoto = (landmark.photo && landmark.photo.url ? landmark.photo.url : '')">
 
-              <img [src]="(landmark.photo_thumb && landmark.photo_thumb.url) ? landmark.photo_thumb.url : '//placehold.it/250'"
+              <img [lazyLoad]="(landmark.photo_thumb && landmark.photo_thumb.url) ? landmark.photo_thumb.url : '//placehold.it/250'"
+                   [defaultImage]="'//placehold.it/250'"
                         class="img-fluid" alt="">
               </div>
               <div class="col p-4">

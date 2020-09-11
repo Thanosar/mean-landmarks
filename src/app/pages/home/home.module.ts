@@ -5,6 +5,7 @@ import {HeaderModule} from '../../core/layouts/header/header.module';
 import {RouterModule} from '@angular/router';
 import {LoaderModule} from '../../core/layouts/loader/loader.module';
 import {ModalModule} from 'ngx-bootstrap/modal';
+import {LazyLoadImageModule} from 'ng-lazyload-image';
 
 
 
@@ -19,6 +20,7 @@ import {ModalModule} from 'ngx-bootstrap/modal';
     RouterModule,
     LoaderModule,
     ModalModule,
+    LazyLoadImageModule,
   ]
 })
 export class HomeModule { }
