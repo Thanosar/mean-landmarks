@@ -1,10 +1,10 @@
 # Dubai's landmarks
 
-A MEAN web application that provides information about famous landmarks of Dubai.
+A MEAN (responsive) web application that provides information about famous landmarks of Dubai.
 
 ## Application
 
-A (responsive) blog that displays information about famous landmarks of Dubai. In the home screen displays a list of landmarks with a photo thumbnail, title and some info about the landmark. Only the administrator has the privilege to update the information (title, description, short info, url, location). He can upload a photo too (not larger than 5MB) and the system automatically create a thumbnail for each photo (250px x 250px).
+A blog that displays information about famous landmarks of Dubai. In the home screen displays a list of landmarks with a photo thumbnail, title and some info about the landmark. Only the administrator has the privilege to update the information (title, description, short info, url, location). He can upload a photo too (not larger than 5MB) and the system automatically create a thumbnail for each photo (250px x 250px).
 
 ### Tech stack
 The application is composed of a front-end and a rest api as back-end system using the following technologies:
