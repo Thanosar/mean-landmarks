@@ -17,7 +17,7 @@ The application is composed of a front-end and a rest api as back-end system usi
 
 ## How to run the application
 
-* Clone this repo and install the dependencies by running `npm install`.
+* Clone this repo and install the dependencies by running `npm install` (required node >=12.x).
 * Rename the .env.example file to .env and insert valid values
 * Start the back-end server by running `npm run server` (required valid .env)
 * Start the app (front-end) by running `ng serve`
